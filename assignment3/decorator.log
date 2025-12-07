@@ -1,0 +1,27 @@
+function: say_hello
+positional parameters: none
+keyword parameters: none
+return: None
+
+function: all_positional
+positional parameters: [1, 'two', 3.0, [4]]
+keyword parameters: none
+return: True
+
+function: only_keywords
+positional parameters: none
+keyword parameters: {'a': 1, 'b': 'bee', 'active': True}
+return: <function logger_decorator at 0x00000282E4047A60>
+
+function: say_hello
+positional parameters: none
+keyword parameters: none
+return: None
+function: all_positional
+positional parameters: [1, 'two', 3.0, [4]]
+keyword parameters: none
+return: True
+function: only_keywords
+positional parameters: none
+keyword parameters: {'a': 1, 'b': 'bee', 'active': True}
+return: <function logger_decorator at 0x0000021E29167A60>
