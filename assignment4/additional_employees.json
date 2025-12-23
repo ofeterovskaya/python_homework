@@ -1,0 +1,18 @@
+{
+  "Name": [
+    "Eve",
+    "Frank"
+  ],
+  "Age": [
+    28,
+    40
+  ],
+  "City": [
+    "Miami",
+    "Seattle"
+  ],
+  "Salary": [
+    60000,
+    95000
+  ]
+}
