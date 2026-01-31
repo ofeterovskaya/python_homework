@@ -1,0 +1,10 @@
+# One challenge was finding the correct element for the Top 10 list in the DOM.
+# At first the scraper returned an empty list, so I had to adjust the selector and wait for content to load.
+
+# The second challenge was that the OWASP Top 10 page loads its content with JavaScript,
+# so the expected items were not present immediately in the HTML. 
+# I resolved this by waiting for the page to render and then filtering links by their A01–A10 pattern.
+
+# Another challenge was that the initial selector targeted the wrong section, 
+# which returned translation links instead of the Top 10 list. 
+# I fixed this by inspecting the page and adjusting the selector to match the Top 10 item links.
