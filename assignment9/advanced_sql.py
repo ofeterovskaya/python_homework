@@ -81,7 +81,7 @@ try:
             print(f"{customer_name:40} | ${avg_price:.2f}")
         else:
             print(f"{customer_name:40} | No orders")
-        
+
 except sqlite3.Error as e:
     print(f"Error executing query: {e}")
 
@@ -102,7 +102,7 @@ cursor = conn.cursor()
 try:
     # Begin transaction
     conn.execute("BEGIN TRANSACTION")
-    
+
     # Step 1: Get customer_id for 'Perez and Sons'
     cursor.execute("SELECT customer_id FROM customers WHERE customer_name = ?", 
                    ('Perez and Sons',))
@@ -111,7 +111,7 @@ try:
         raise Exception("Customer 'Perez and Sons' not found")
     customer_id = customer_result[0]
     print(f"Customer ID for 'Perez and Sons': {customer_id}")
-    
+
     # Step 2: Get employee_id for Miranda Harris
     cursor.execute("SELECT employee_id FROM employees WHERE first_name = ? AND last_name = ?",
                    ('Miranda', 'Harris'))
@@ -120,25 +120,25 @@ try:
         raise Exception("Employee 'Miranda Harris' not found")
     employee_id = employee_result[0]
     print(f"Employee ID for 'Miranda Harris': {employee_id}")
-    
+
     # Step 3: Get 5 least expensive products
     cursor.execute("SELECT product_id, product_name, price FROM products ORDER BY price LIMIT 5")
     products = cursor.fetchall()
     print(f"\n5 Least Expensive Products:")
     for product in products:
         print(f"  Product ID {product[0]}: {product[1]} - ${product[2]:.2f}")
-    
+
     # Step 4: Create new order with today's date
     cursor.execute("""
         INSERT INTO orders (customer_id, employee_id, date) 
         VALUES (?, ?, ?) 
         RETURNING order_id
     """, (customer_id, employee_id, '2026-01-30'))
-    
+
     order_result = cursor.fetchone()
     order_id = order_result[0]
     print(f"\nCreated Order ID: {order_id}")
-    
+
     # Step 5: Create line_items for each of the 5 products (10 of each)
     print("\nCreating line items...")
     for product in products:
@@ -148,11 +148,11 @@ try:
             VALUES (?, ?, ?)
         """, (order_id, product_id, 10))
         print(f"  Added 10 units of product {product_id}")
-    
+
     # Commit the transaction
     conn.commit()
     print("\nTransaction committed successfully!")
-    
+
     # Step 6: Query the line_items with JOIN to show the result
     cursor.execute("""
         SELECT li.line_item_id, li.quantity, p.product_name
@@ -160,16 +160,16 @@ try:
         JOIN products p ON li.product_id = p.product_id
         WHERE li.order_id = ?
     """, (order_id,))
-    
+
     line_items = cursor.fetchall()
-    
+
     print(f"\nLine Items for Order {order_id}:")
     print("-" * 60)
     print("Line Item ID | Quantity | Product Name")
     print("-" * 60)
     for item in line_items:
         print(f"{item[0]:12} | {item[1]:8} | {item[2]}")
-    
+
 except sqlite3.Error as e:
     conn.rollback()
     print(f"Transaction failed and rolled back: {e}")
@@ -208,13 +208,13 @@ ORDER BY order_count DESC
 try:
     cursor.execute(sql_query_4)
     results = cursor.fetchall()
-    
+
     print("Employee ID | First Name    | Last Name     | Order Count")
     print("-" * 60)
     for row in results:
         emp_id, first_name, last_name, order_count = row
         print(f"{emp_id:11} | {first_name:13} | {last_name:13} | {order_count}")
-        
+
 except sqlite3.Error as e:
     print(f"Error executing query: {e}")
 
