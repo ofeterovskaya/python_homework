@@ -1,0 +1,14 @@
+# 1. Which sections of the website are restricted for crawling?
+# /w/ (dynamic MediaWiki pages)
+# /api/ (except the explicitly allowed: /w/api.php?action=mobileview&, /w/load.php?, /api/rest_v1/?doc, /w/rest.php/site/v1/sitemap)
+# /trap/
+# /wiki/Special: and localized variants (Spezial, Spesial, and their URL-encoded forms)
+# Many Wikipedia administrative/service areas listed in robots.txt (deletion discussions, arbitration, spam blacklist, etc.).
+
+# 2. Are there specific rules for certain user agents?
+#  Yes. Some user agents are fully disallowed (Disallow: /), some have empty Disallow (allowed), and SemrushBot has Crawl-delay: 5.
+
+# 3. Why websites use robots.txt and how it promotes ethical scraping?
+# Robots.txt tells bots which parts of a site they may or may not crawl to protect administrative or resource-intensive pages. 
+# This reduces server load and prevents unwanted indexing. 
+# Following robots.txt is part of ethical scraping because it respects the site owner’s rules.
